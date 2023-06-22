@@ -416,8 +416,12 @@ Verander in het bovenstaande commando het `<ip_adres` met het aangepaste IP-adre
 
 - In het veld dat tevoorschijn komt, zet een vinkje achter "Replace wireless configuration". Vul het wachtwoord van een eduroam account in bij "WPA passphrase". Klik vervolgens op "Submit".
 
-- Klik op onder "Interface Configuration" op "Wireless Security". Verander de "Encryption" in "WPA2-EAP".
+- Klik onder "Interface Configuration" op "Wireless Security". Verander de "Encryption" in "WPA2-EAP".
 
 - Vul bij "Identity" de gebruikersnaam in van het eduroam account.
+
+- Verander "Authentication" naar "EAP-MSCHAPv2".
+
+- Vul bij "Password" het wachtwoord in van het eduroam account.
 
 - Klik op "Save".
