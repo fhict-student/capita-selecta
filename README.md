@@ -414,14 +414,53 @@ Verander in het bovenstaande commando het `<ip_adres` met het aangepaste IP-adre
 
 - Nadat de scan is voltooid, zoek in de lijst naar "eduroam". Klik hier op "Join Network".
 
-- In het veld dat tevoorschijn komt, zet een vinkje achter "Replace wireless configuration". Vul het wachtwoord van een eduroam account in bij "WPA passphrase". Klik vervolgens op "Submit".
+- In het scherm dat tevoorschijn komt, zet een vinkje achter "Replace wireless configuration". Vul het wachtwoord van een eduroam account in bij "WPA passphrase". Klik vervolgens op "Submit".
 
-- Klik onder "Interface Configuration" op "Wireless Security". Verander de "Encryption" in "WPA2-EAP".
+- Onder "Device Configuration":
+	- "Operating frequency":
+		- Zet "Mode" naar "N".
+		- Zet "Band" naar "2.4 GHz".
+		- Zet "Channel" naar "7 (2442 MHz)".
+		- Zet "Width" naar "20 MHz".
 
-- Vul bij "Identity" de gebruikersnaam in van het eduroam account.
+- Onder "Interface Configuration":
+	- "General Setup":
+		- Zet "Mode" naar "Client".
+		- Zet "ESSID" naar "eduroam".
+		- Zet "Network" naar de "wwan"-interface.
 
-- Verander "Authentication" naar "EAP-MSCHAPv2".
+	- "Wireless Security":
+		- Zet "Encryption" naar "WPA2-EAP (strong security)".
+		- Zet "Cipher" naar "Force TKIP and CCMP (AES)".
+		- Zet "EAP-Method" naar "PEAP".
+		- Zet "Authentication" naar "EAP-MSCHAPv2".
+		- Vul achter "Identity" de gebruikersnaam van een eduroam-account in.
+		- Vul achter "Password" het wachtwoord van een eduroam-account in.
+		- Klik op "Save".
 
-- Vul bij "Password" het wachtwoord in van het eduroam account.
+- Klik op "Save & Apply". De Router zou nu verbinding moeten maken met eduroam.
+
+## Configureer de netwerkadapter
+- Plug de netwerkadapter in een beschikbare USB-poort op de Raspberry Pi.
+
+- Refresh het OpenWrt-tablad in de browser op de computer / laptop.
+
+- Klik in de rij waar "SSID: OpenWrt" staat op "Edit".
+
+- Onder "Device Configuration":
+	- "Operating frequency":
+		- Zet "Channel" naar "1 (2412 MHz)".
+		- Zet "Width" naar "20 MHz".
+
+- Onder "Interface Configuration":
+	- "General Setup":
+		- Zet "Mode" naar "Access Point".
+		- Verander "ESSID"; dit is de naam van de access point. In deze handleiding zal "OpenWrt" als SSID worden aangehouden.
+		- Zet "Network" naar de "lan"-interface.
+
+	- "Wireless Security":
+		- Zet "Encryption" naar "WPA2-PSK".
+		- Zet "Cipher" naar "auto".
+		- Zet "Key" naar een wachtwoord naar keuze; dit is het wachtwoord waarmee verbinding gemaakt kan worden met de access point.
 
 - Klik op "Save".
