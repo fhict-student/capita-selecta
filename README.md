@@ -1,3 +1,19 @@
+## Inhoudsopgave
+- [Definities](https://github.com/fhict-student/capita-selecta/tree/main#definities)
+- [Benodigde Hardware](https://github.com/fhict-student/capita-selecta/tree/main#benodigde-hardware)
+- [Benodigde Software](https://github.com/fhict-student/capita-selecta/tree/main#benodigde-software)
+- [Voorbereiding](https://github.com/fhict-student/capita-selecta/tree/main#voorbereiding)
+  - [Netwerkadapter Drivers](https://github.com/fhict-student/capita-selecta/tree/main#netwerkadapter-drivers)
+- [Installatie en verbinding](https://github.com/fhict-student/capita-selecta/tree/main#installatie-en-verbinding)
+  - [Besturingssysteem](https://github.com/fhict-student/capita-selecta/tree/main#besturingssysteem)
+  - [Connectie met de Raspberry Pi](https://github.com/fhict-student/capita-selecta/tree/main#connectie-met-de-raspberry-pi)
+- [Configureer OpenWrt](https://github.com/fhict-student/capita-selecta/tree/main#configureer-openwrt)
+  - [Back-up](https://github.com/fhict-student/capita-selecta/tree/main#back-up)
+  - [Aanpassingen](https://github.com/fhict-student/capita-selecta/tree/main#aanpassingen)
+  - [Reboot en re-connect](https://github.com/fhict-student/capita-selecta/tree/main#reboot-en-re-connect)
+- [Verbind met eduroam](https://github.com/fhict-student/capita-selecta/tree/main#verbind-met-eduroam)
+- [Configureer de netwerkadapter](https://github.com/fhict-student/capita-selecta/tree/main#configureer-de-netwerkadapter)
+
 ## Definities
 In deze handleiding wordt verstaan onder: 
 
@@ -14,7 +30,7 @@ Voor een succesvolle installatie van de Router is bepaalde hardware vereist:
 | Toetsenbord en (Micro) HDMI-kabel met monitor<br>_of_<br>Computer / laptop met ethernetpoort    | Voor het configureren van de Router kan er gekozen worden tussen de voorheen genoemde mogelijkheden. Het verdient aanbeveling om gebruik te maken van een computer / laptop met een ethernetpoort, aangezien dit apparaat ook gebruikt kan worden voor het gebruik van de SD-kaartlezer. Het gebruik van een toetsenbord en een (Micro) HDMI-kabel met monitor is hierdoor overbodig.<br><br>**Let op:** de verschillende type Raspberry Pi's hebben verschillende HDMI-poorten. [Onderzoek](https://www.factoryforward.com/difference-between-raspberry-pi-hdmi-port-types/) eerst welke HDMI-poort de gekozen Raspberry Pi heeft. |
 | Ethernetkabel (optioneel)                                                           | Voor een bedrade verbinding met het Netwerk is een ethernetkabel nodig. Het gebruik hiervan wordt sterk aanbevolen. Voor het gebruik van een ethernetkabel in de Router moet de gekozen Raspberry Pi wel beschikken over een ethernetpoort.                                                                                                                                                                                                                                                                                                                                                                             |
 
-## Benodigdheden (Software)
+## Benodigde Software
 Voor een succesvolle installatie van de Router is bepaalde software vereist:
 
 | Benodigdheid            | Opmerking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -36,7 +52,7 @@ Onderzoek welke driver nodig is voor de gekozen netwerkadapter.
 - Schrijf of sla de naam van de package ergens op. Deze is nodig in een volgende stap.
 
 ## Installatie en verbinding
-### Operating System
+### Besturingssysteem
 - Download de OpenWrt firmware voor de Raspberry Pi. Dit kan gemakkelijk gedaan worden via de [firmware-selector](https://firmware-selector.openwrt.org/) op de officiële website van OpenWrt.
 	- Typ in de zoekbalk de naam van de gekozen Raspberry Pi. Bijvoorbeeld, "Raspberry Pi 4B". Kies wanneer mogelijk voor de 64bit versie.
 	- Vooraf kunnen benodigde packages geïnstalleerd worden op de image. Doe dit door op "Customize installed packages and/or first boot script" te klikken.
@@ -384,7 +400,7 @@ config wifi-iface 'default_radio0'
   ```
 </details>
 
-### Reboot en re-connect.
+### Reboot en re-connect
 Nu er aanpassingen zijn gemaakt aan het IP-adres en de firewall van de router, moeten de aanpassingen toegepast worden. Dit kan gemakkelijk gedaan worden door opnieuw op te starten. 
 
 - Noteer het aangepaste IP-adres uit `/etc/config/network`; dit IP-adres is nodig voor de verbinding met de Router.
@@ -414,10 +430,53 @@ Verander in het bovenstaande commando het `<ip_adres` met het aangepaste IP-adre
 
 - Nadat de scan is voltooid, zoek in de lijst naar "eduroam". Klik hier op "Join Network".
 
-- In het veld dat tevoorschijn komt, zet een vinkje achter "Replace wireless configuration". Vul het wachtwoord van een eduroam account in bij "WPA passphrase". Klik vervolgens op "Submit".
+- In het scherm dat tevoorschijn komt, zet een vinkje achter "Replace wireless configuration". Vul het wachtwoord van een eduroam account in bij "WPA passphrase". Klik vervolgens op "Submit".
 
-- Klik op onder "Interface Configuration" op "Wireless Security". Verander de "Encryption" in "WPA2-EAP".
+- Onder "Device Configuration":
+	- "Operating frequency":
+		- Zet "Mode" naar "N".
+		- Zet "Band" naar "2.4 GHz".
+		- Zet "Channel" naar "7 (2442 MHz)".
+		- Zet "Width" naar "20 MHz".
 
-- Vul bij "Identity" de gebruikersnaam in van het eduroam account.
+- Onder "Interface Configuration":
+	- "General Setup":
+		- Zet "Mode" naar "Client".
+		- Zet "ESSID" naar "eduroam".
+		- Zet "Network" naar de "wwan"-interface.
+
+	- "Wireless Security":
+		- Zet "Encryption" naar "WPA2-EAP (strong security)".
+		- Zet "Cipher" naar "Force TKIP and CCMP (AES)".
+		- Zet "EAP-Method" naar "PEAP".
+		- Zet "Authentication" naar "EAP-MSCHAPv2".
+		- Vul achter "Identity" de gebruikersnaam van een eduroam-account in.
+		- Vul achter "Password" het wachtwoord van een eduroam-account in.
+		- Klik op "Save".
+
+- Klik op "Save & Apply". De Router zou nu verbinding moeten maken met eduroam.
+
+## Configureer de netwerkadapter
+- Plug de netwerkadapter in een beschikbare USB-poort op de Raspberry Pi.
+
+- Refresh het OpenWrt-tablad in de browser op de computer / laptop.
+
+- Klik in de rij waar "SSID: OpenWrt" staat op "Edit".
+
+- Onder "Device Configuration":
+	- "Operating frequency":
+		- Zet "Channel" naar "1 (2412 MHz)".
+		- Zet "Width" naar "20 MHz".
+
+- Onder "Interface Configuration":
+	- "General Setup":
+		- Zet "Mode" naar "Access Point".
+		- Verander "ESSID"; dit is de naam van de access point. In deze handleiding zal "OpenWrt" als SSID worden aangehouden.
+		- Zet "Network" naar de "lan"-interface.
+
+	- "Wireless Security":
+		- Zet "Encryption" naar "WPA2-PSK".
+		- Zet "Cipher" naar "auto".
+		- Zet "Key" naar een wachtwoord naar keuze; dit is het wachtwoord waarmee verbinding gemaakt kan worden met de access point.
 
 - Klik op "Save".
