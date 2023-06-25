@@ -1,3 +1,19 @@
+## Inhoudsopgave
+- [Definities](https://github.com/fhict-student/capita-selecta/tree/main#definities)
+- [Benodigde Hardware](https://github.com/fhict-student/capita-selecta/tree/main#benodigde-hardware)
+- [Benodigde Software](https://github.com/fhict-student/capita-selecta/tree/main#benodigde-software)
+- [Voorbereiding](https://github.com/fhict-student/capita-selecta/tree/main#voorbereiding)
+  - [Netwerkadapter Drivers](https://github.com/fhict-student/capita-selecta/tree/main#netwerkadapter-drivers)
+- [Installatie en verbinding](https://github.com/fhict-student/capita-selecta/tree/main#installatie-en-verbinding)
+  - [Besturingssysteem](https://github.com/fhict-student/capita-selecta/tree/main#besturingssysteem)
+  - [Connectie met de Raspberry Pi](https://github.com/fhict-student/capita-selecta/tree/main#connectie-met-de-raspberry-pi)
+- [Configureer OpenWrt](https://github.com/fhict-student/capita-selecta/tree/main#configureer-openwrt)
+  - [Back-up](https://github.com/fhict-student/capita-selecta/tree/main#back-up)
+  - [Aanpassingen](https://github.com/fhict-student/capita-selecta/tree/main#aanpassingen)
+  - [Reboot en re-connect](https://github.com/fhict-student/capita-selecta/tree/main#reboot-en-re-connect)
+- [Verbind met eduroam](https://github.com/fhict-student/capita-selecta/tree/main#verbind-met-eduroam)
+- [Configureer de netwerkadapter](https://github.com/fhict-student/capita-selecta/tree/main#configureer-de-netwerkadapter)
+
 ## Definities
 In deze handleiding wordt verstaan onder: 
 
@@ -14,7 +30,7 @@ Voor een succesvolle installatie van de Router is bepaalde hardware vereist:
 | Toetsenbord en (Micro) HDMI-kabel met monitor<br>_of_<br>Computer / laptop met ethernetpoort    | Voor het configureren van de Router kan er gekozen worden tussen de voorheen genoemde mogelijkheden. Het verdient aanbeveling om gebruik te maken van een computer / laptop met een ethernetpoort, aangezien dit apparaat ook gebruikt kan worden voor het gebruik van de SD-kaartlezer. Het gebruik van een toetsenbord en een (Micro) HDMI-kabel met monitor is hierdoor overbodig.<br><br>**Let op:** de verschillende type Raspberry Pi's hebben verschillende HDMI-poorten. [Onderzoek](https://www.factoryforward.com/difference-between-raspberry-pi-hdmi-port-types/) eerst welke HDMI-poort de gekozen Raspberry Pi heeft. |
 | Ethernetkabel (optioneel)                                                           | Voor een bedrade verbinding met het Netwerk is een ethernetkabel nodig. Het gebruik hiervan wordt sterk aanbevolen. Voor het gebruik van een ethernetkabel in de Router moet de gekozen Raspberry Pi wel beschikken over een ethernetpoort.                                                                                                                                                                                                                                                                                                                                                                             |
 
-## Benodigdheden (Software)
+## Benodigde Software
 Voor een succesvolle installatie van de Router is bepaalde software vereist:
 
 | Benodigdheid            | Opmerking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -36,7 +52,7 @@ Onderzoek welke driver nodig is voor de gekozen netwerkadapter.
 - Schrijf of sla de naam van de package ergens op. Deze is nodig in een volgende stap.
 
 ## Installatie en verbinding
-### Operating System
+### Besturingssysteem
 - Download de OpenWrt firmware voor de Raspberry Pi. Dit kan gemakkelijk gedaan worden via de [firmware-selector](https://firmware-selector.openwrt.org/) op de officiële website van OpenWrt.
 	- Typ in de zoekbalk de naam van de gekozen Raspberry Pi. Bijvoorbeeld, "Raspberry Pi 4B". Kies wanneer mogelijk voor de 64bit versie.
 	- Vooraf kunnen benodigde packages geïnstalleerd worden op de image. Doe dit door op "Customize installed packages and/or first boot script" te klikken.
@@ -384,7 +400,7 @@ config wifi-iface 'default_radio0'
   ```
 </details>
 
-### Reboot en re-connect.
+### Reboot en re-connect
 Nu er aanpassingen zijn gemaakt aan het IP-adres en de firewall van de router, moeten de aanpassingen toegepast worden. Dit kan gemakkelijk gedaan worden door opnieuw op te starten. 
 
 - Noteer het aangepaste IP-adres uit `/etc/config/network`; dit IP-adres is nodig voor de verbinding met de Router.
