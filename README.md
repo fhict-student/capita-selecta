@@ -35,7 +35,7 @@ Voor een succesvolle installatie van de Router is bepaalde software vereist:
 
 | Benodigdheid            | Opmerking                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenWrt firmware        | OpenWrt is een op Linux gebaseerd besturingssysteem dat speciaal is ontworpen voor routers en andere embedded apparaten. Het biedt geavanceerde netwerkfuncties en configuratiemogelijkheden en heeft ook uitgebreide beveiligings- en prestatie-optimalisatiefuncties, wat het een geschikte keuze maakt voor de huidige opstelling.<br><br>Lees onder Operating System onder [Installatie](#installatie) meer over de downloadprocedure.                                                                                                                        |
+| OpenWrt firmware        | OpenWrt is een op Linux gebaseerd besturingssysteem dat speciaal is ontworpen voor routers en andere embedded apparaten. Het biedt geavanceerde netwerkfuncties en configuratiemogelijkheden en heeft ook uitgebreide beveiligings- en prestatie-optimalisatiefuncties, wat het een geschikte keuze maakt voor de huidige opstelling.<br><br>Lees onder Operating System onder [Installatie en verbinding](#installatie-en-verbinding) meer over de downloadprocedure.                                                                                                                        |
 | Image flashing software | Er zijn diverse soorten software beschikbaar voor het flashen van een Operating System op een (Micro) SD-kaart, zoals Balena Etcher, Rufus en ImageUSB. Desalniettemin wordt het aanbevolen om gebruik te maken van [Raspberry Pi Imager](https://www.raspberrypi.com/software/), aangezien deze software uiterst gebruiksvriendelijk is en goed van pas komt bij de installatie van Raspberry Pi OS. Dit besturingssysteem is immers benodigd voor andere handleidingen in deze repository. In deze handleiding wordt gebruikgemaakt van de Raspberry Pi Imager. | 
 
 ## Voorbereiding
@@ -44,7 +44,7 @@ Onderzoek welke driver nodig is voor de gekozen netwerkadapter.
 - Zoek op [deze](http://en.techinfodepot.shoutwiki.com/w/index.php?title=Special%3ASearch&search=&fulltext=Search) website naar de gekozen netwerkadapter. Typ bijvoorbeeld "Netgear WNA1100" of "TP-LINK TL-WN725N". 
 - Klik op "Search" en klik in de zoekresultaten de passende pagina aan.
 - Zoek in de informatietabel naar "Linux driver". Voor bijvoorbeeld de Netgear netwerkadapter is hier "ath9k_htc" als driver te vinden. Andere adapters hebben mogelijk andere drivers nodig, zoals bijvoorbeeld "8812au" of "rtl8192cu".
-- Open [deze](https://openwrt.org/packages/table/start) pagina. Klik in het zoekveld onder "Name" in de tabel.
+- Open [deze](https://openwrt.org/packages/table/start) pagina (duurt enorm lang). Klik in het zoekveld onder "Name" in de tabel.
 - Zoek naar de bijbehorende driver. Typ bijvoorbeeld "ath9k" of "rtl8192cu" en druk vervolgens op <kbd>⏎ Enter</kbd>.
 - Controleer welke package nodig is voor de gekozen netwerkadapter. Bijvoorbeeld:
 	- De Netgear netwerkadapter heeft als driver "ath9k_htc" nodig. Uit het zoekresultaat blijkt dat de package "kmod-ath9k-htc" nodig is.
@@ -54,7 +54,8 @@ Onderzoek welke driver nodig is voor de gekozen netwerkadapter.
 ## Installatie en verbinding
 ### Besturingssysteem
 - Download de OpenWrt firmware voor de Raspberry Pi. Dit kan gemakkelijk gedaan worden via de [firmware-selector](https://firmware-selector.openwrt.org/) op de officiële website van OpenWrt.
-	- Typ in de zoekbalk de naam van de gekozen Raspberry Pi. Bijvoorbeeld, "Raspberry Pi 4B". Kies wanneer mogelijk voor de 64bit versie.
+	- In deze handleiding wordt gebruik gemaakt van OpenWrt versie 22.03.5. 
+	- Typ in de zoekbalk de naam van de gekozen Raspberry Pi. Bijvoorbeeld, "Raspberry Pi 4B". Kies wanneer mogelijk voor de 64bit versie. 
 	- Vooraf kunnen benodigde packages geïnstalleerd worden op de image. Doe dit door op "Customize installed packages and/or first boot script" te klikken.
 	- In de lijst van "Installed Packages" staan de packets die vooraf op de firmware worden geïnstalleerd, gescheiden door een spatie. Verwijder uit deze lijst de tekst "wpad-basic-wolfssl". Voeg aan het einde "wpad", "hostapd-common" en "luci" toe. Voeg ook de naam van de Netwerkadapter driver package uit [Voorbereiding](#voorbereiding) toe, bijvoorbeeld "kmod-ath9k-htc" of "kmod-rtl8192cu". Het wordt aanbevolen om ook de teksteditor "nano" toe te voegen.
 	- Klik op "Request Build" en wacht tot de build succesvol is afgerond.
